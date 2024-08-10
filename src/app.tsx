@@ -1,27 +1,26 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from 'sonner'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { CreateRoom } from './pages/create-room'
 import { Room } from './pages/room'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './lib/react-query'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <CreateRoom/>
+    element: <CreateRoom />
   },
   {
     path: '/room/:roomId',
-    element: <Room/>
+    element: <Room />
   }
-]) 
+])
 
 export function App() {
   return (
-    <>  {/*No react não podemos renderizar um elemento abaixo do outro sem ter nada em volta, por isso utilizamos o fragment <> */}
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-      <Toaster invert richColors/>
-    </>
-    
+      <Toaster invert richColors />
+    </QueryClientProvider>
   )
 }
-
-
